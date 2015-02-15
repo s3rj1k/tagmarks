@@ -1,0 +1,20 @@
+# Count distinct places ids:
+sqlite3 ~/.mozilla/firefox/*default*/places.sqlite "SELECT COUNT(fk) FROM moz_bookmarks WHERE type=1 ORDER BY lastModified;"
+
+# Retrieve list of bookmarks distinct places ids ordered by lastModified timestamp:
+sqlite3 ~/.mozilla/firefox/*default*/places.sqlite "SELECT fk FROM moz_bookmarks WHERE type=1 ORDER BY lastModified;"
+
+# Retrieve the bookmark URL by url id:
+sqlite3 ~/.mozilla/firefox/*default*/places.sqlite "SELECT url FROM moz_places WHERE id=121538;"
+
+# Retrieve the title by url id:
+sqlite3 ~/.mozilla/firefox/*default*/places.sqlite "SELECT title FROM moz_bookmarks WHERE fk=121538 AND title!='' LIMIT 1;"
+
+# Retrieve last modification timestamp for url id:
+sqlite3 ~/.mozilla/firefox/*default*/places.sqlite "SELECT lastModified FROM moz_bookmarks WHERE fk=121538 ORDER BY lastModified DESC LIMIT 1;"
+
+# Retrieve ids of tags assigned to url id:
+sqlite3 ~/.mozilla/firefox/*default*/places.sqlite "SELECT parent FROM moz_bookmarks WHERE fk=121538 AND title IS NULL;"
+
+# Retrieve list of tags assigned to tags ids:
+sqlite3 ~/.mozilla/firefox/*default*/places.sqlite "SELECT title FROM moz_bookmarks WHERE id IN (15366,15368);"

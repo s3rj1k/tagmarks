@@ -1,0 +1,16 @@
+https://mongolab.com/databases/tagmarks
+http://docs.mongodb.org/manual/reference/method/
+http://stackoverflow.com/questions/4837673/how-to-execute-mongo-commands-through-shell-scripts
+
+mongo ds053218.mongolab.com:53218/tagmarks -u dbuser -p dbpwd
+mongo ds053218.mongolab.com:53218/tagmarks -u dbuser -p dbpwd --quiet tagmarks.js
+
+db.tagmarks.drop()
+db.createCollection("tagmarks",{autoIndexId:false})
+db.tagmarks.insert({url:"https://openwrt.org/",name:"OpenWrt",date:ISODate("2010-09-24"),tags:["Дистрибутивы","embedded"]})
+db.tagmarks.insert({url:"http://antisms.com/",name:"AntiSMS",date:ISODate("2010-09-24"),tags:["Дистрибутивы","winpe"]})
+
+db.tagmarks.find({tags:{$all:['Дистрибутивы']}},{_id:0}).sort({_id:-1}).skip(10).limit(10)
+db.tagmarks.find({tags:{$all:['winpe','Дистрибутивы']}}).sort({_id:-1})
+db.tagmarks.find({tags:{$all:['Дистрибутивы']}}).sort({_id:-1})
+db.tagmarks.distinct('tags').sort()
